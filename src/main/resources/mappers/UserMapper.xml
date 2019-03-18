@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cmloveletter.dao.UserMapper">
+    <select id="getAllUser" resultType="User">
+        SELECT * FROM USER
+    </select>
+    <select id="login" resultType="User">
+        SELECT * FROM USER WHERE uname = #{uname} AND upwd = #{upwd}
+    </select>
+    <select id="insertUser" resultType="User">
+        INSERT INTO UDER(UID,UNAME,UPWD,USEX) VALUES (#{uid},#{uname},#{upwd},#{usex}
+    </select>
+    <select id="deleteUser" resultType="User">
+       DELETE FROM USER WHERE UID = #{uid}
+    </select>
+</mapper>

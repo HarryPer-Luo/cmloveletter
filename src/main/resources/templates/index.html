@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<style>
+    #page{text-align: center;}
+    table{margin: 10px auto; }
+    #data td{width: 100px; border: 1px solid #333 ;}
+    #pageNum td{width: 50px; border: 1px solid #333; color: white}
+</style>
+<body>
+<div id="page">
+    <div style="height: 20px">
+        <p style="size: 14px; color: cornflowerblue">
+            <span>欢迎你：</span><span th:text="${session.ADMIN_SESSION.uname}">！</span>
+            <a href="loginout">退出</a>
+        </p>
+    </div>
+    <table id="data" cellspacing="0" bgcolor="#f0ffff" >
+        <tr><td>ID</td><td>用户名</td><td>密码</td><td>性别</td></tr>
+        <tr th:each="user : ${pageInfo.list}">
+            <td th:text="${user.uid}"></td>
+            <td th:text="${user.uname}"></td>
+            <td th:text="${user.upwd}"></td>
+            <td th:text="${user.usex==0?'女':'男'}"></td>
+        </tr>
+    </table>
+    <table id="pageNum" bgcolor="#6495ed">
+        <tr>
+            <td th:if="${pageInfo.hasPreviousPage}">
+                <a th:href="'?pageNo=1'">首页</a>
+            </td>
+            <td th:if="${pageInfo.hasPreviousPage}">
+                <a th:href="'?pageNo='+${pageInfo.prePage}">上一页</a>
+            </td>
+            <th th:each="nav : ${pageInfo.navigatepageNums}">
+                <a th:href="'?pageNo='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+                <span style="font-weight: bold" th:if="${nav == pageInfo.pageNum}" th:text="${nav}"></span>
+            </th>
+            <td th:if="${pageInfo.hasNextPage}">
+                <a th:href="'?pageNo='+${pageInfo.nextPage}">下一页</a>
+            </td>
+            <td th:if="${pageInfo.hasNextPage}">
+                <a th:href="'?pageNo='+${pageInfo.pages}">尾页</a>
+            </td>
+        </tr>
+    </table>
+
+    <table id="dataTable">
+        <tr>
+            <td>当前页号：</td>
+            <td><span th:text="${pageInfo.pageNum}"></span></td>
+            <td>每页条数：</td>
+            <td><span th:text="${pageInfo.pageSize}"></span></td>
+        </tr>
+        <tr>
+            <td>起始行号：</td>
+            <td><span th:text="${pageInfo.startRow}"></span></td>
+            <td>每页条数：</td>
+            <td><span th:text="${pageInfo.pageSize}"></span></td>
+        </tr>
+        <tr>
+            <td>终止行号：</td>
+            <td><span th:text="${pageInfo.endRow}"></span></td>
+            <td>总结果数：</td>
+            <td><span th:text="${pageInfo.total}"></span></td>
+        </tr>
+        <tr >
+            <td colspan="2">总页数：</td>
+            <td colspan="2"><span th:text="${pageInfo.pages}"></span></td>
+        </tr>
+        <tr>
+            <td>是否为第一页：</td>
+            <td><span th:text="${pageInfo.isFirstPage}"></span></td>
+            <td>是否为最后一页：</td>
+            <td><span th:text="${pageInfo.isLastPage}"></span></td>
+        </tr>
+        <tr>
+            <td>是否有前一页：</td>
+            <td><span th:text="${pageInfo.hasPreviousPage}"></span></td>
+            <td>是否有下一页：</td>
+            <td><span th:text="${pageInfo.hasNextPage}"></span></td>
+        </tr>
+    </table>
+
+    <hr/>
+    <div>
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file"><br>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+</div>
+</body>
+</html>
