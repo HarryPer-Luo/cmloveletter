@@ -17,7 +17,7 @@ import java.util.List;
 public class CmloveletterApplicationTests {
 
     @Autowired
-    UserServiceImpl s;
+    UserServiceImpl service;
 
     @Test
     public void contextLoads() {
