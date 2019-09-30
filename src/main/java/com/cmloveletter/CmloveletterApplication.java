@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching  //开启缓存
 public class CmloveletterApplication {
 
+    //测试
     public static void main(String[] args) {
         SpringApplication.run(CmloveletterApplication.class, args);
     }
